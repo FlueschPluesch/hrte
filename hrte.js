@@ -661,7 +661,7 @@
 									<div style="display: inline-block; width: 40%;">Reward addresses:<br><textarea id="rewardAddresses" rows="3" style="resize: none; font-size: 75%; width: 100%;">` + horizenRewardExporter.rewardAddresses + `</textarea></div>
 									<div style="display: inline-block; width: 15%;"><button id="Hrte_start_button" type="button">Start</button><br><button id="Hrte_reset_button" style="margin-top: 6%;" type="button">Reset</button></div>
 									<div style="display: inline-block; width: 15%; border: 0px solid black;"><center><span style="font-size: 300%;">?</span><br><button id="userGuide" type="button">User guide</button></center></div>
-									<div style="display: inline-block; width: 15%; border: 0px solid black;"><center><span style="font-size: 300%;">&#9993;</span><br><button onclick="location.href='mailto:weddingCrasher@yandex.com'" type="button">Contact developer</button></center></div>
+									<div style="display: inline-block; width: 15%; border: 0px solid black;"><center><span style="font-size: 300%;">&#9993;</span><br><button onclick="location.href='mailto:flueschpluesch@gmail.com'" type="button">Contact developer</button></center></div>
 									<div style="width: 100%;">
 										<h3>Filter</h3>
 										<div class="fieldsetHrte" style="width: 29%">
