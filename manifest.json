@@ -1,0 +1,33 @@
+{
+  "name": "HRTE",
+  "version": "1.4.0",
+  "manifest_version": 2,
+  "description": "Horizen Rewards/Transactions Exporter",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "HRTE"
+  },
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "content_scripts": [
+   {
+     "matches": ["https://explorer.horizen.global/*", "https://explorer.zen-solutions.io/*", "https://explorer.zensystem.io/*"],
+     "css": ["hrte.css", "jquery-ui.css"],
+     "js": ["jquery.js", "hrte.js", "jquery-ui.min.js"]
+   }
+  ],
+  "icons": { "16": "logo_16.png",
+             "48": "logo_48.png",
+            "128": "logo_128.png" },
+  "permissions": [
+	"https://explorer.horizen.global/*",
+	"https://explorer.zen-solutions.io/*",
+	"https://explorer.zensystem.io/*"
+  ]
+}
