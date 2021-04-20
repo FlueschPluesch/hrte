@@ -300,6 +300,8 @@
 								console.log('Rewards:');
 								console.log(horizenRewardExporter.transactions.info);
 								
+								$('#filterCointainer').removeClass('hidden');
+								
 							}
 							
 						}).fail(function() {
@@ -661,8 +663,8 @@
 									<div style="display: inline-block; width: 40%;">Reward addresses:<br><textarea id="rewardAddresses" rows="3" style="resize: none; font-size: 75%; width: 100%;">` + horizenRewardExporter.rewardAddresses + `</textarea></div>
 									<div style="display: inline-block; width: 15%;"><button id="Hrte_start_button" type="button">Start</button><br><button id="Hrte_reset_button" style="margin-top: 6%;" type="button">Reset</button></div>
 									<div style="display: inline-block; width: 15%; border: 0px solid black;"><center><span style="font-size: 300%;">?</span><br><button id="userGuide" type="button">User guide</button></center></div>
-									<div style="display: inline-block; width: 15%; border: 0px solid black;"><center><span style="font-size: 300%;">&#9993;</span><br><button onclick="location.href='mailto:flueschpluesch@gmail.com'" type="button">Contact developer</button></center></div>
-									<div style="width: 100%;">
+									<div style="display: inline-block; width: 15%; border: 0px solid black;"><center><span style="font-size: 300%;">&#9993;</span><br><button id="contactDeveloper" type="button">Contact developer</button></center></div>
+									<div id="filterCointainer" style="width: 100%;" class="hidden">
 										<h3>Filter</h3>
 										<div class="fieldsetHrte" style="width: 29%">
 											<fieldset style="width: 100%;">
@@ -872,18 +874,26 @@
 					$('#Hrte_start_button').click(function() {
 						
 						if (horizenRewardExporter.status == '') {
+							
+							$(this).attr('disabled', true);
 						
 							horizenRewardExporter.status = 'querying';
 						
 							horizenRewardExporter.transactions.get();
 							
-							$(this).attr('disabled', true);
+							$('#filterCointainer').addClass('hidden');
 							
 						} else {
 						
 							horizenRewardExporter.log('Queries still running.', 3);
 						
 						}
+						
+					});
+					
+					$('#contactDeveloper').click(function() {
+						
+						location.href = 'mailto:flueschpluesch@gmail.com';
 						
 					});
 					
@@ -914,6 +924,8 @@
 					horizenRewardExporter.log('Queries still running.', 3);
 					
 				} else {
+					
+					$('#filterCointainer').addClass('hidden');
 					
 					horizenRewardExporter.transactions.receivedTotal = 0;
 					

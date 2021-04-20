@@ -17,7 +17,7 @@
   ],
   "content_scripts": [
    {
-     "matches": ["https://explorer.horizen.global/*", "https://explorer.zen-solutions.io/*", "https://explorer.zensystem.io/*"],
+     "matches": ["https://explorer.horizen.io/*", "https://explorer.horizen.global/*", "https://explorer.zen-solutions.io/*", "https://explorer.zensystem.io/*"],
      "css": ["hrte.css", "jquery-ui.css"],
      "js": ["jquery.js", "hrte.js", "jquery-ui.min.js"]
    }
