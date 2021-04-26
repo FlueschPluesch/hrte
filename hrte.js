@@ -398,7 +398,7 @@
 									
 									lastMonth.setDate(1);
 									lastMonth.setHours(0, 0, 0, 0);
-									
+
 									dataFilteredTemp.push(jQuery.extend(true, {}, {
 										
 										txid : transactionNumber,
@@ -720,9 +720,8 @@
 				getContentUserGuide : function() {
 					
 					var content = `
-					
 						<div id="closeUserGuide" style="position: absolute; font-size: 200%; right: 20px; top: 10px; cursor: pointer;">X</div>
-						<h2>User guide</h2>
+						<h2 style="margin-top: 0;">User guide</h2>
 						<span style="font-size: 150%;">Steps:</span><br>
 						<ol>
 						  <li>Enter your address in the top search bar of the insight explorer.</li>
@@ -741,7 +740,8 @@
 						  <li>Click the "Export rewards as CSV" button. 
 						  Or, if you want to download all transactions in raw format and not only the rewards, click on the "Export all transactions (raw)" button.</li>
 						</ol> 
-					
+						<br>
+						Note that the dates are output in GMT/UTC. It should be correct for your time zone when imported.
 					
 					`;	
 					
@@ -771,7 +771,7 @@
 					css( { 	'z-index' : 100, 
 							display: 'none',
 							padding : '2%', 
-							height : '50%', 
+							height : '55%', 
 							width : '40%', 
 							position : 'fixed', 
 							top : '30%', 
