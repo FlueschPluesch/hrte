@@ -9,7 +9,7 @@
 			
 			address : '',
 			rewardAddresses : 'zsi4CcCUYtR1iNjEyjkLPjSVPzSPa4atxt9' + '\n' + 'zsoVG9Evw68te8hRAP3xPXSbx9HoH26LUYN',
-			images : ['' + chrome.runtime.getURL('images/ui-icons_444444_256x240.png'), chrome.runtime.getURL('images/ui-icons_555555_256x240.png')],
+			images : ['' + chrome.runtime.getURL('images/ui-icons_444444_256x240.png'), '' + chrome.runtime.getURL('images/ui-icons_555555_256x240.png'), '' + chrome.runtime.getURL('images/loader.gif')],
 			
 			status : '',
 			
@@ -301,6 +301,7 @@
 								console.log(horizenRewardExporter.transactions.info);
 								
 								$('#filterCointainer').removeClass('hidden');
+								$('#loaderImg').fadeOut();
 								
 							}
 							
@@ -341,7 +342,7 @@
 						var newStartDate = $.datepicker.parseDate('dd.mm.yy', $('#startDate').val());
 						var newEndDate = $.datepicker.parseDate('dd.mm.yy', $('#endDate').val());
 						
-						//Use complete EndeDate
+						//Use complete EndDate
 						newEndDate.setHours(23);
 						newEndDate.setMinutes(59);
 						newEndDate.setSeconds(59);
@@ -658,7 +659,7 @@
 								<h2>Horizen Rewards/Transactions Export</h2>
 								Address: <span id="HrteAddressField"></span><br>
 								<div style="display: inline-block; padding: 2%; width: 50%; overflow: auto;  max-height: 75%" id="HTC-Output"></div>
-								<div id="pagesGui" style="position: absolute; font-size: 100%; left: 20px; bottom: 10px; cursor: pointer;"></div>
+								<img id="loaderImg" style="display: none; position: absolute; font-size: 100%; left: 20px; bottom: 10px; width: 20px; height: auto;" src="` + horizenRewardExporter.images[2] + `" alt="Loader"><div id="pagesGui" style="position: absolute; font-size: 100%; left: 45px; bottom: 10px;"></div>
 								<div style="display: inline-block; padding: 2%; width: 49%; border-left: 2px solid black; vertical-align: top;" id="HTC-Options"><h3 style="margin-top: 0;">Controls</h3>
 									<div style="display: inline-block; width: 40%;">Reward addresses:<br><textarea id="rewardAddresses" rows="3" style="resize: none; font-size: 75%; width: 100%;">` + horizenRewardExporter.rewardAddresses + `</textarea></div>
 									<div style="display: inline-block; width: 15%;"><button id="Hrte_start_button" type="button">Start</button><br><button id="Hrte_reset_button" style="margin-top: 6%;" type="button">Reset</button></div>
@@ -671,7 +672,7 @@
 												<legend class="legendHrte">Time rage: </legend>
 													<div style="display: inline-block; width: 35%;">
 														StartDate<br>
-														EndeDate 
+														EndDate 
 													</div>
 													<div style="display: inline-block; width: 50%; margin-left: 5%;">
 														<input style="width: 100%; type="text" id="startDate"><br>
@@ -876,6 +877,7 @@
 						if (horizenRewardExporter.status == '') {
 							
 							$(this).attr('disabled', true);
+							$('#loaderImg').fadeIn();
 						
 							horizenRewardExporter.status = 'querying';
 						
@@ -946,6 +948,7 @@
 					$('#HTC-Output, #pagesGui').html('');
 					
 					$('#Hrte_start_button').attr('disabled', false);
+					$('#loaderImg').fadeOut();
 					
 				}
 				
