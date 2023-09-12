@@ -1,4 +1,4 @@
-# hrte - Horizen Rewards/Transactions Exporter
+# HRTE - Horizen Rewards/Transactions Exporter
 This application can be used to export the income of Horizen master and securenodes or mining of any address (e.g. for your tax report). If you want, you can also just export all transactions in raw format.
 ## User guide
 The extension is available in the Chrome Web Store https://chrome.google.com/webstore/detail/hrte/hlcokiejfjkkafinoiknhkbhpedhbgld. But you can still use the source code with the help of the developer mode. For security reasons, I suggest you use a sperate chrome for this, which you don't use for anything else.
