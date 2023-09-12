@@ -74,6 +74,8 @@
 			transactions : {
 				
 				receivedTotal : 0,
+				startDate : "",
+				endDate : "",
 				
 				pagesTotal : 0,
 				currentPage : 0,
@@ -166,6 +168,18 @@
 												
 												horizenRewardExporter.transactions.cache += zenVal;
 											
+											} else {
+												
+												if (horizenRewardExporter.transactions.endDate == "") {
+													
+													horizenRewardExporter.transactions.endDate = elementTa.time;
+													
+												} else {
+													
+													horizenRewardExporter.transactions.startDate = elementTa.time;
+													
+												}
+												
 											}
 											
 											txsContent += '<br> - - <b>N:</b> ' + elementTaData.n;
@@ -184,7 +198,7 @@
 								
 							});
 							
-							horizenRewardExporter.log('<span style="cursor: pointer; padding: 2px; " id="tas_page_' + horizenRewardExporter.transactions.currentPage + '_header">CurrentPage: ' + (horizenRewardExporter.transactions.currentPage + 1) + ' &#8595;</span><br><span style="display: none;" id="tas_page_' + horizenRewardExporter.transactions.currentPage + '_content">' + txsContent + '</span>');
+							horizenRewardExporter.log('<span style="cursor: pointer; padding: 2px; " id="tas_page_' + horizenRewardExporter.transactions.currentPage + '_header">Page: ' + (horizenRewardExporter.transactions.currentPage + 1) + ' &#8595;</span><br><span style="display: none;" id="tas_page_' + horizenRewardExporter.transactions.currentPage + '_content">' + txsContent + '</span>');
 							
 							$('#tas_page_' + horizenRewardExporter.transactions.currentPage + '_header').click(function() {
 								
@@ -264,27 +278,58 @@
 								console.log('Raw filtered by Address:');
 								console.log(horizenRewardExporter.transactions.raw);
 								
+								console.log('Rewards:');
+								console.log(horizenRewardExporter.transactions.info);
+								
 								horizenRewardExporter.status = '';
 								
-								//Set min max date
-								horizenRewardExporter.transactions.filter.startDate = horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[horizenRewardExporter.transactions.info.length - 1].date);
-								horizenRewardExporter.transactions.filter.endDate = horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[0].date);
-								
-								$('#startDate').datepicker({
-						
-									dateFormat: 'dd.mm.yy',
-									minDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[horizenRewardExporter.transactions.info.length - 1].date, true),
-									maxDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[0].date, true)
+								if (horizenRewardExporter.transactions.info.length) {
 									
-								});
-								
-								$('#endDate').datepicker({
-						
-									dateFormat: 'dd.mm.yy',
-									minDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[horizenRewardExporter.transactions.info.length - 1].date, true),
-									maxDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[0].date, true)
+									//Set min max date
+									horizenRewardExporter.transactions.filter.startDate = horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[horizenRewardExporter.transactions.info.length - 1].date);
+									horizenRewardExporter.transactions.filter.endDate = horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[0].date);
 									
-								});
+									$('#startDate').datepicker({
+							
+										dateFormat: 'dd.mm.yy',
+										minDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[horizenRewardExporter.transactions.info.length - 1].date, true),
+										maxDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[0].date, true)
+										
+									});
+									
+									$('#endDate').datepicker({
+							
+										dateFormat: 'dd.mm.yy',
+										minDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[horizenRewardExporter.transactions.info.length - 1].date, true),
+										maxDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.info[0].date, true)
+										
+									});
+								
+								} else {
+									
+									//Set min max date
+									horizenRewardExporter.transactions.filter.startDate = horizenRewardExporter.formatDate(horizenRewardExporter.transactions.startDate);
+									horizenRewardExporter.transactions.filter.endDate = horizenRewardExporter.formatDate(horizenRewardExporter.transactions.endDate);
+									
+									$('#startDate').datepicker({
+							
+										dateFormat: 'dd.mm.yy',
+										minDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.startDate, true),
+										maxDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.endDate, true)
+										
+									});
+									
+									$('#endDate').datepicker({
+							
+										dateFormat: 'dd.mm.yy',
+										minDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.startDate, true),
+										maxDate: horizenRewardExporter.formatDate(horizenRewardExporter.transactions.endDate, true)
+										
+									});
+									
+									horizenRewardExporter.log(`No Rewards found!<br>`, 3);
+									
+								}
 								
 								$("<style type='text/css'>.ui-widget-header .ui-icon { background-image: url('" + horizenRewardExporter.images[0] + "') } .ui-state-hover .ui-icon { background-image: url('" + horizenRewardExporter.images[1] + "') !important } </style>").appendTo("head");
 								
@@ -296,9 +341,6 @@
 								horizenRewardExporter.log(`Done. <br>Pages ` + (horizenRewardExporter.transactions.currentPage + 1) + `/` + (horizenRewardExporter.transactions.pagesTotal + 1) + ` received.<br>
 								From ` + horizenRewardExporter.transactions.filter.startDate + ` to ` + horizenRewardExporter.transactions.filter.endDate + `. 
 								<br>` + horizenRewardExporter.transactions.raw.length + ` transactions processed.<br>` + horizenRewardExporter.transactions.receivedTotal + ` Zen received.`, 1);
-								
-								console.log('Rewards:');
-								console.log(horizenRewardExporter.transactions.info);
 								
 								$('#filterCointainer').removeClass('hidden');
 								$('#loaderImg').fadeOut();
